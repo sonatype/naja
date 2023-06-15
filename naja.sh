@@ -27,9 +27,10 @@ function runCobra() {
   git clone https://github.com/sonatype/cobra-rules.git $rulesdir
   git clone https://github.com/sonatype/naja.git 'naja'
   git clone https://github.com/nimble-code/Cobra.git 'cobra'
+  cwd=$(pwd)
   cd cobra/src
   make linux
-  cwd=$(pwd)
+  cd "$cwd"
   export PATH="$cwd/cobra/src:$PATH"
   cobraname="/naja/cobrarunner.py"
   cobrarunner="$SCRIPT_DIR$cobraname"
