@@ -30,7 +30,7 @@ function runCobra() {
   cwd=$(pwd)
   cd cobra/src
   make linux
-  cd "$cwd"
+  cd "$1"
   export PATH="$cwd/cobra/src:$PATH"
   cobraname="/naja/cobrarunner.py"
   cobrarunner="$SCRIPT_DIR$cobraname"
