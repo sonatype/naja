@@ -20,13 +20,14 @@ function runCobra() {
   cwd=$(pwd)
   cobraname="/naja/cobrarunner.py"
   cobrarunner="$SCRIPT_DIR$cobraname"
-  echo "$cobrarunner"
-  python "$cobrarunner" "./" "$rulesdir" 
+  echo "$cobrarunner" 1>&2
+  pip3 install pandas 1>&2
+  python3 "$cobrarunner" "./" "$rulesdir" 1>&2
 
   cat /tmp/tmpcobra.json | jq '.' | jq -s
 }
 
-case "$1" in
+case "$3" in
     run)
         runCobra
         ;;
