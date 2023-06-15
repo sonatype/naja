@@ -14,10 +14,23 @@ function tellApplicable() {
 function runCobra() {
   SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
   rulesdir="/tmp/cobra-rules/"
-  mkdir $rulesdir
+  if [ -d "$rulesdir" ]; then
+    rm -rf "$rulesdir"
+  fi
+  if [ -d "naja" ]; then
+    rm -rf "naja"
+  fi
+  if [ -d "cobra" ]; then
+    rm -rf "cobra"
+  fi
+  mkdir -p $rulesdir
   git clone https://github.com/sonatype/cobra-rules.git $rulesdir
   git clone https://github.com/sonatype/naja.git 'naja'
+  git clone https://github.com/nimble-code/Cobra.git 'cobra'
+  cd cobra/src
+  make linux
   cwd=$(pwd)
+  export PATH="$cwd/cobra/src:$PATH"
   cobraname="/naja/cobrarunner.py"
   cobrarunner="$SCRIPT_DIR$cobraname"
   echo "$cobrarunner" 1>&2
